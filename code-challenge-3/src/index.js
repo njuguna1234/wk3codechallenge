@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async(event)=>{
 
 
 function getfilm(){
-return fetch("http://localhost:3000/films", {
+return fetch("https://code-challengewk3.onrender.com/films", {
     method: "GET",
     headers:{
         "Content-Type": "application/json",
@@ -21,7 +21,7 @@ return fetch("http://localhost:3000/films", {
 
 document.addEventListener("DOMContentLoaded", function() {
     // Make a GET request to retrieve movie details
-    fetch('http://localhost:3000/films/1')
+    fetch('https://code-challengewk3.onrender.com/films/1')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('runtime').textContent = `${data.runtime} minutes`;
         document.getElementById('showtime').textContent = data.showtime;
         document.getElementById('ticket-num').textContent = availableTickets;
+        document.getElementById('film-info').textContent = data.description
       })
       .catch(error => {
         console.error('There was a problem fetching the movie details:', error);
@@ -46,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   document.addEventListener("DOMContentLoaded", function() {
     // Make a GET request to retrieve movie data
-    fetch('http://localhost:3000/films')
+    fetch('https://code-challengewk3.onrender.com/films')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -87,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
         // Persist updated number of tickets_sold on the server
         const filmId = 1; // Assuming the film ID is 1 for the first movie
-        fetch(`http://localhost:3000/films/${filmId}`, {
+        fetch(`https://code-challengewk3.onrender.com/films/${filmId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -103,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
           return response.json();
         })
         .then(updatedFilm => {
-          console.log('Tickets_sold updated on the server:', updatedFilm);
+          console.log('Tickets_sold updated on the server:', updatedFilms);
         })
         .catch(error => {
           console.error('There was a problem updating tickets_sold:', error);
@@ -111,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
         // Log the new ticket purchase
         const numberOfTickets = 1; // Assuming only one ticket is bought at a time
-        fetch('/tickets', {
+        fetch('https://code-challengewk3.onrender.com/films/tickets', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -154,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
   
       // Send a DELETE request to the server to delete the film
-      fetch(`http://localhost:3000/films/${filmId}`, {
+      fetch(`https://code-challengewk3.onrender.com/films/${filmId}`, {
         method: 'DELETE'
       })
       .then(response => {
@@ -195,10 +196,12 @@ document.addEventListener("DOMContentLoaded", function() {
         availableTicketsElement.textContent = availableTickets;
   
         // If sold out, update button text and film item in menu
+        fetch('https://code-challengewk3.onrender.com/films')
         if (availableTickets === 0) {
           const filmItem = document.getElementById(`film-${filmId}`);
           if (filmItem) {
-            filmItem.classList.add('sold-out');
+            // filmItem.classList.add('sold-out');
+            console.log(sold-out)
           }
           const buyTicketButton = document.getElementById(`buy-ticket-${filmId}`);
           if (buyTicketButton) {
@@ -224,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   
     // This part handles updating the film list menu when the page loads
-    fetch('http://localhost:3000/films')
+    fetch('https://code-challengewk3.onrender.com/films/${films}')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -233,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function() {
       })
       .then(data => {
         const filmsList = document.getElementById('films');
-        filmsList.innerHTML = ''; // Clear existing content
+        filmsList.innerHTML = 'https://code-challengewk3.onrender.com/films'; // Clear existing content
         data.forEach(film => {
           const listItem = document.createElement('li');
           listItem.id = `film-${film.id}`;
